@@ -1,0 +1,9 @@
+#!/bin/sh
+
+count=$(ls __src/chapters | wc -l)
+if [[ "${count}" -lt "10" ]]; then
+  count="0${count}"
+fi
+fname="./__src/chapters/${count}-${1}.tex"
+cp -i "./templates/chapter.tex" "${fname}"
+vim -c 'set ft=tex' "${fname}"
