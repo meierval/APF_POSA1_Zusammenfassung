@@ -1,12 +1,39 @@
 \chapter{Layers}
 
-\section{Context}
+\section{Summary}
 
+\section{Context}
+Dieses Pattern hilft Applikationen zu strukturieren, welche in Gruppen von Teilaufgaben zerteilt werden können so dass, jede Gruppe auf einem bestimmten Abstraktionslevel ist.
 
 \section{Problem}
-
+Beispiel Netzwerk Protokolle (OSI Stack)
+Jeder layer gewisse aufgaben und Nutzt services des eins tieferen layer
+Vorteile
+ - Einfacherer Austausch von Teilen
+ - "Supporting incremental coding and testing"
+ - "aiding development by teams"
+ - Mehrfachverwendung bestimmter layer
+Problem:
+System mit low und high level problemen, highlevel benutzen lowlevel
 
 \section{Solution}
+System in layer aufteilen und diese aufeinander aufbauen. tiefster abstraktionslevel zu unterst. Selber abstraktionslevel aller komponenten in einem layer! Immer nur zugriff von oben nach unten!
+Bei vielen objekten pro layer ein interface objekt das kommuniziert mit anderen layern. Meist wird aus einem request von oben mehrere im unteren layer da höhere abstraktion verlohren geht (primitivere operationen). Oben nach unten -> request, unten nach oben -> notification.
+Vorgehen:
+1. Abstraktionskriterien definieren (wo die layer sich abgrenzen)
+2. Anzahl abstraktionslevel definieren
+3. Layers benennen und Tasks zuteilen
+4. Services pro Layer spezifizieren
+5. 1-4 wiederholen zur Verfeinerung
+6. Ein Interface pro Layer definieren, evtl Facarde
+7. Layer inerhalb Strukturieren. Bridge /Strategy Pattern
+8. Kommunikation zwischen benachbarten layern spezifizieren
+9. Benachbarte Layer entkuppeln. bsp One-Way Coupling. Retour mit callbacks (Reactor/Command Pattern)
+10. Error Handling Strategie entwickeln. entweder im Layer behandeln oder an den nächst höheren weitergeben. Faustregel:Am besten am tiefstmöglichen Layer behandeln.
+
+Variante: "Relaxed Layered System" Layer können Services aller unterliegenden Layer benutzen. Mehr flexibilität und peformance. Weniger Wartbarkeit.
+"Layering through inheritance"  für OO-Systeme. Lower layer als base clases. Höhere layer erben von diesen. So können höhere Layer funktionalität von tieferen anpassen so wie sie es benötigen
+
 
 
 \subsection{Structure}
@@ -17,17 +44,34 @@
 %  \caption{Sequenzdiagram f\"ur Wrapper Facade}
 %\end{figure}
 
-\section{Known Uses}
-
-
 \section{Consequences}
 \begin{itemize}
-    \pro{Bla}
-    \con{Bla}
+    \pro{Wiederverwendbarkeit von Layern}
+    \pro{Austauschbarkeit von Layern}
+    \pro{Support für Standardisierung}
+    \pro{Dependencies bleiben lokal}
+    \con{Tiefere Effizienz}
+    \con{Mehr Aufwand}
+    \con{Schwierigkeit beim bestimmen der Granularität der Layer}
+\end{itemize}
 
+\section{Known Uses}
+\begin{itemize}
+	\item OSI Protocol Stack 
+	\item Virtual Machines
+	\item APIs
+	\item Information Systems
+	\item Windows NT
+\end{itemize}
+
+\section{Relationships}
+\begin{itemize}
+	\item COMPOSITE MESSAGE
+	\item Mikrokernel architecture
 \end{itemize}
 
 \section{Exam Questions}
 \begin{itemize}
-  \item Behauptung: Blabla (Lösung)
+  \item Behauptung: Etwas zu bottom-up dekouplung in layer? (Lösung)
+    \item Frage: Welches GOF Pattern hilft bei der definierung von Interfaces im Layers Pattern? (Facace Pattern)
 \end{itemize}
