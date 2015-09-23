@@ -35,9 +35,8 @@
 {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
 \titlespacing*{\chapter}{0pt}{0pt}{40pt}
 
-\renewcommand{\labelenumi}{\alph{enumi}.}
+%\renewcommand{\labelenumi}{\alph{enumi}.}
 
-\newcommand{\inputChapter}[1]{\input{__src/chapters/#1}}
 \newcommand{\pro}[1]{\item [pro]#1}
 \newcommand{\con}[1]{\item [con]#1}
 
@@ -153,8 +152,7 @@
 \setcounter{tocdepth}{0}
 \tableofcontents
 
-\inputChapter{00-layers}
-
+\input{chapters/00-layers.tex}
 
 \clearpage
 \vspace*{\fill}

@@ -6,18 +6,20 @@ Das Layer Pattern hilft Applikationen zu strukturieren, welche in Gruppen von Te
 Ein grosses System das Zerlegung benötigt.
 
 \section{Problem}
-Ein grosses System mit Low- und Highlevel Problemen hat zu wenig Struktur. Es ist schwer Wartbar und die Aufgaben und Grenzen zwischen den Komponenten sind ungenau.
+Ein grosses System mit Low- und Highlevel Problemen hat zu wenig Struktur. Die Highlevel-Probleme bauen dabei auf den Lowlevel-Problemen auf. Es ist schwer Wartbar und die Aufgaben und Grenzen zwischen den Komponenten sind ungenau.
+
+Ein mögliches Beispiel für ein solches System ist ein Netzwerk. Dabei ist ein Lowlevel-Problem: \textit{"Wie bringe ich Daten von A nach B?"} und ein Highlevel-Problem: \textit{"Wie ordne ich verschiedene Pakete einer logischen Session zu?"}
 
 \section{Solution}
 Das System wird in beliebig viele Layer aufgeteilt. Die Layer bauen aufeinander auf, wobei der höchste Layer den höchsten Abstraktionsgrad hat. Alle Komponenten mit dem selben Abstrationsgrad befinden sich auf dem selben Layer. Jedem Layer werden bestimmte Aufgaben zugewiesen. Er nutzt jeweils die Services des eins tieferen Layers. \\\\
 Bei vielen Komponenten pro Layer wird je Layer ein Interface Objekt definiert welches mit den anderen Layern kommuniziert. Meist wird aus einem Request (Zugriff von Oben nach Unten) mehrere je tiefer der Request in den Layern nach unten wandert. Das Umgekehrte gilt bei einer Notification (Zugriff von Unten nach Oben).
-Die folgenden Schritte beschreiben eine Schrittweiser Ansatz zur Definition einer Layer Architektur. Dies ist nicht immer die beste Lösung. Es sind auch nicht alle Schritte zwingend notwendig. Vorgehen:
+Die folgenden Schritte beschreiben einen schrittweisen Ansatz zur Definition einer Layer Architektur. Dies ist nicht immer die beste Lösung. Es sind auch nicht alle Schritte zwingend notwendig. Vorgehen:
 \begin{enumerate}
 	\item Abstraktionskriterien definieren (Wie die Layer sich abgrenzen)
 	\item Anzahl Abstraktionslevel definieren
 	\item Layers benennen und Tasks zuteilen
 	\item Services pro Layer spezifizieren
-	\item 1-4 zur Verfeinerung wiederholen
+	\item 1.-4. zur Verfeinerung wiederholen
 	\item Ein Interface pro Layer definieren, eventuell Facade Pattern anwenden
 	\item Layer im Innern strukturieren (Bridge/Strategy Pattern)
 	\item Kommunikation zwischen benachbarten Layern spezifizieren
@@ -32,11 +34,11 @@ Es gibt noch zwei weitere Varianten des Layer Pattern:
 
 \subsection{Structure}
 
-%\begin{figure}[H]
-%  \centering
-%  \includesvg[width=0.8\textwidth]{}
-%  \caption{Sequenzdiagram f\"ur Wrapper Facade}
-%\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{figures/00-layers-1}
+  \caption{Illustration des Layer-Patterns}
+\end{figure}
 
 \section{Consequences}
 \begin{itemize}
@@ -47,6 +49,7 @@ Es gibt noch zwei weitere Varianten des Layer Pattern:
     \con{Tiefere Effizienz}
     \con{Mehr Aufwand}
     \con{Schwierigkeit beim bestimmen der Granularität der Layer}
+    \con{Jeder Layer-Übergang schmälert die Performance}
 \end{itemize}
 
 \section{Known Uses}
@@ -60,8 +63,8 @@ Es gibt noch zwei weitere Varianten des Layer Pattern:
 
 \section{Relationships}
 \begin{itemize}
-	\item COMPOSITE MESSAGE
-	\item Mikrokernel architecture
+	\item \textit{Composite Message} beschreibt eine objekt-orientierte Verschachtelung von Nachrichten, welche durch die Schichten transportiert werden. Eine Composite Message ist ein Paket, welches aus header, payload und eingebetteten Paketen besteht.
+	\item \textit{Mikrokernel Architecture} kann als spezialisierte Layer-Architektur angesehen werden.
 \end{itemize}
 
 \section{Exam Questions}
