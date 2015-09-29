@@ -1,7 +1,12 @@
 *.aux
+
 *.log
+
 *.pdf
+
 *.out
+
 *.pdf_tex
+
 *.lock
 
