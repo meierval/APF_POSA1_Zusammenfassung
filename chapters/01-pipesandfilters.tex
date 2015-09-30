@@ -18,10 +18,20 @@ Durch das "Pipies and Filters" Pattern werden folgende Forces adressiert:
 \section{Problem}
 Gegeben ist ein System welches einen Stream von Daten verarbeiten muss. Das System wird von mehreren Entwicklern implementiert. Ausserdem lässt sich die generelle Aufgabe des Systems leicht in mehrere Teilaufgaben unterteilen, und die Wahrscheinlichkeit ist hoch, dass sich die Requirements ändern. Die Frage ist nun wie ein solches System designt werden soll damit mehrere Entwickler daran arbeiten können und flexibel auf Änderungen an den Requirements reagiert werden kann.
 \section{Solution}
-Mittels dem "Pipies and Filters" Pattern werden die Arbeitsschritte eines Systems in mehrere sequentiell verarbeitete Schritte unterteilt. Die Schritte sind durch den Data Flow durch das System verbunden, das heisst, die Output Daten eines Schrittes sind die Input Daten des nächsten. Jeder Arbeitsschritt wird als Filter Komponente implementiert. Ein Filter konsumiert und übermittelt inkrementell. Die Daten Source, die Filter und der Daten "Sink" werden durch sogenannte Pipes verbunden. 
+Mittels dem "Pipies and Filters" Pattern werden die Arbeitsschritte eines Systems in mehrere sequentiell verarbeitete Schritte unterteilt. Die Schritte sind durch den Data Flow durch das System verbunden, das heisst, die Output Daten eines Schrittes sind die Input Daten des nächsten. Jeder Arbeitsschritt wird als Filter Komponente implementiert. Ein Filter konsumiert und übermittelt inkrementell. Die Daten "Source", die Filter und der Daten "Sink" werden durch sogenannte Pipes verbunden.
+Bei der Umsetzung des Patterns kann wie folgt vorgegangen werden (Reihenfolge nicht zwingend).
+\begin{enumerate}
+	\item Systemaufgaben in eine Sequenz von Verarbeitungsschritten unterteilen
+	\item Definieren des Datenaustauschformats in Pipes
+	\item Entscheiden wie die einzelnen Pipes zu implementieren sind (Aktiv/Passiv)
+	\item Design und Implementation der Filter
+	\item Design des Error Handlings
+	\item Aufsetzen der Verarbeitungspipeline
+\end{enumerate}
 
 \subsection{Structure}
-Filter sind die Verarbeitungseinheiten einer Pipeline. Ein Filter hat drei Aufgaben:
+Im folgenden werden kurz die Komponenten des Pipes and Filters Patterns erklärt:
+\paragraph{Filter} sind die Verarbeitungseinheiten einer Pipeline. Ein Filter hat drei Aufgaben:
 \begin{enumerate}
 	\item Anreichern von Daten durch Berechnungen und hinzufügen von Informationen
 	\item Verfeinern von Daten durch Konzentration oder Extraktion von Daten
@@ -33,14 +43,22 @@ Ein Filter kann durch verschiedene Events ausgelöst werden:
 	\item Der vorangehende Filter pushed die Input Daten
 	\item Üblicherweise pulling von Input Daten und pushen von Output Daten in einem Loop
 \end{itemize}
-Bei den ersten beiden Methoden handelt es sich um passive Filter, weil sie darauf warten getriggert zu werden. Bei der dritten Methode handelt es sich um einen aktiven Filter.
-
-%\begin{figure}[H]
-%  \centering
-%  \includegraphics[width=0.8\textwidth]{figures/00-layers-1}
-%  \caption{Illustration des Layer-Patterns}
-%\end{figure}
-
+Bei den ersten beiden Methoden handelt es sich um passive Filter, weil sie darauf warten getriggert zu werden. Bei der dritten Methode handelt es sich um einen aktiven Filter. 
+\paragraph{Pipes} sind die Verbindungen zwischen Filtern, oder am Anfang beziehungsweise am Ende der Pipeline zwischen Source und Filter, respektive Filter und Sink. Werden zwei Aktive Filter verbunden werden von der Pipe mittels eines FIFO Buffers synchronisiert.
+\paragraph{Data Source} repräsentiert den Input in das System. Sie liefert eine Sequenz von Daten der selben Struktur oder des selben Typs. Beispiele wären ein Textfile oder ein Sensor. Auch hier gibt es eine aktive (Source pusht) und eine pasive (nächster Filter pullt) Variante.
+\paragraph{Data Sink} sammelt die Resultate am Ende der Pipeline, auch sie kann aktiv (Sink pullt) oder passiv sein (Filter pushed).\\
+Folgende Grafik zeigt nochmals die Komponenten des Pipes and Filters Pattern mit ihren Zuständigkeiten.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{figures/01-pipesandfilters-1}
+  \caption{Illustration der Pipes and Filters Komponenten}
+\end{figure}
+Die Verwendung von Pipes and Filters kann generell in Vier Szenarien unterteilt werden. Eine Push Pipeline bei der die Aktivität bei der Daten Source startet, eine Pull Pipeline bei der sie beim Daten Sink startet, eine gemischte Push/Pull Pipeline bei der ein Filter die aktive Rolle spielt und schlussendlich das komplexeste Szenario bei dem alle Komponenten aktiv pushen und pullen. Beim letzen Szenario sind Buffer zur synchronisation notwendig. Folgende Grafik illustriert das letzte Szenario.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{figures/01-pipesandfilters-2}
+	\caption{Illustration der Pipes and Filters Komponenten}
+\end{figure}
 \section{Consequences}
 \begin{itemize}
     \pro{Keine Speicherung von Zwischenresultaten notwendig, jedoch weiterhin möglich}

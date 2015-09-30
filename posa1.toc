@@ -15,7 +15,11 @@
 \contentsline {section}{\numberline {2.3}Problem}{6}{section.2.3}
 \contentsline {section}{\numberline {2.4}Solution}{6}{section.2.4}
 \contentsline {subsection}{\numberline {2.4.1}Structure}{7}{subsection.2.4.1}
-\contentsline {section}{\numberline {2.5}Consequences}{7}{section.2.5}
-\contentsline {section}{\numberline {2.6}Known Uses}{7}{section.2.6}
-\contentsline {section}{\numberline {2.7}Relationships}{7}{section.2.7}
-\contentsline {section}{\numberline {2.8}Exam Questions}{8}{section.2.8}
+\contentsline {paragraph}{Filter}{7}{paragraph*.3}
+\contentsline {paragraph}{Pipes}{7}{paragraph*.4}
+\contentsline {paragraph}{Data Source}{7}{paragraph*.5}
+\contentsline {paragraph}{Data Sink}{7}{paragraph*.6}
+\contentsline {section}{\numberline {2.5}Consequences}{8}{section.2.5}
+\contentsline {section}{\numberline {2.6}Known Uses}{9}{section.2.6}
+\contentsline {section}{\numberline {2.7}Relationships}{9}{section.2.7}
+\contentsline {section}{\numberline {2.8}Exam Questions}{9}{section.2.8}
