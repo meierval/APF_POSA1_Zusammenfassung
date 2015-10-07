@@ -1,33 +1,56 @@
 \chapter{Blackboard}
 
 \section{Summary}
-  
+Das Blackboard Pattern ist nützlich bei Problemen für die keine deterministischen Lösungsstrategien bekannt sind. Dabei kombinieren mehrere spezialisierte Teilsysteme ihr Wissen um eine annähernde Lösung zu kreieren. 
 \section{Context}
-
-
+Eine unreife Domäne in der keine eindeutige Herangehensweise zu einer Lösung bekannt oder möglich ist.
 
 \section{Problem}
+Das Blackboard Pattern kümmert sich um Probleme bei denen es keine praktikable deterministische Lösung für die Transformation von Rohen Daten nach High-Level Datenstrukturen (Tabellen, Diagramme, etc.) gibt. Solche Probleme charakterisieren sich dadurch, dass wenn man Sie in Teilprobleme unterteilt, diese sich über mehrere Kompetenzbereiche verteilen. Es gibt dabei keine vordefinierte Strategie, wie die Teilprobleme ihr Wissen kombinieren sollten.\\
+Folgende Forces beeinflussen die Lösungen zu solchen Problemen:
+\begin{itemize}
+	\item Ein komplettes durchsuchen der Lösung ist nicht innert brauchbarer Zeit möglich
+	\item Experimentieren mit verschiedenen Algorithmen für denselben Subtask notwendig
+	\item Verschiedene Algorithmen lösen das selbe Problem
+	\item Input, Zwischenresultate und Endresultate haben verschiedene Formate
+	\item Ein Algorithmus arbeitet auf den Resultaten eines anderen Algorithmus
+	\item Ungenaue Lösung und Näherungswerte sind oft einbezogen
+	\item Zerlegte Algorithmen bringen eventuell Parallelität ein 
+\end{itemize}
 
 \section{Solution}
-
+Die Idee hinter der Blackboard Architektur ist eine Sammlung von unabhängigen Programmen die zusammen auf einer gemeinsamen Datenstruktur arbeiten. Jedes Programm ist darauf spezialisiert ein gewisses Teilproblem zu lösen, es arbeitet komplett unabhängig von den andern. Es gibt auch keine vordefinierte Reihenfolge in der sie ablaufen, die Reihenfolge wird vom aktuellen Prozessstatus bestimmt. Eine zentrale Kontrollkomponente, "Moderator" genannt, evaluiert den aktuellen Prozessstatus und Koordiniert die Programme. Dieses Daten gesteuerte System nennt man "opportunistic problem solving".\\
+Während dem Problemlösungsprozess arbeitet das System mit Teillösungen welche kombiniert, geändert und verworfen werden. Das Set aller möglichen Lösungen wird "solution space" genannt und ist nach Abstraktionsleveln organisiert.\\
+Der Name Blackboard kommt von der Ähnlichkeit zur Situation in der mehrere Menschen um ein richtiges Blackboard stehen und versuchen zusammen ein Problem zu lösen.
 
 \subsection{Structure}
 
 \section{Consequences}
 \begin{itemize}
-    \pro{pro argument}
-    \con{con argument}
-    
+    \pro{Experimentieren mit verschiedenen Algorithmen}
+    \pro{Verschiedene Kontrollheuristiken können verknüpft werden}
+    \pro{Unterstützt Wartbarkeit und Veränderbarkeit}
+    \pro{Wiederverwendbare Wissensquellen}
+    \pro{Fault Tolerance und Robustness}
+    \con{Schwierig zu testen}
+    \con{Keine gute Lösung garantiert}
+    \con{Schwierig eine gute Kontrollstrategie zu entwickeln}
+    \con{Tiefe Effizienz}
+    \con{Hoher Entwicklungsaufwand}
+    \con{Kein Support für Parallelität}
 \end{itemize}
 
 \section{Known Uses}
 \begin{itemize}
-	\item used for
+	\item CRYSALIS (X-Ray Bilderkennung)
+	\item HEARSAY-II (Spracherkennung)
+	\item HASP/SIAP (Erkennung von gegnerischen U-Booten)
+	\item TRICERO (Monitoring von Flugzeug Aktivitäten) 
 \end{itemize}
 
 \section{Relationships}
 \begin{itemize}
-	\item \textit{Patternoderso} Blabla
+	\item \textit{Keine} 
 \end{itemize}
 
 \section{Exam Questions}
