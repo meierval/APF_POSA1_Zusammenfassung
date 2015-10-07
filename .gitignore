@@ -10,3 +10,6 @@
 
 *.lock
 
+
+*.toc
+*.synctex.gz
