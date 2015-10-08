@@ -24,6 +24,20 @@ Während dem Problemlösungsprozess arbeitet das System mit Teillösungen welche
 Der Name Blackboard kommt von der Ähnlichkeit zur Situation in der mehrere Menschen um ein richtiges Blackboard stehen und versuchen zusammen ein Problem zu lösen.
 
 \subsection{Structure}
+Für das Blackboard Pattern werden drei verschiedene Komponenten benötigt, das Blackboard selbst, eine Sammlung von "Knowledge Sources" und eine "Control" Komponente. Im folgenden werden diese kurz beschrieben.
+\paragraph{Blackboard}
+Das Blackboard dient als zentraler gemeinsamer Datenspeicher. Der Begriff "Vocabulary" wird für die Sammlung von Datenelementen verwendet die auf dem Blackboard erscheinen können. Vom Blackboard wird ein Interface angeboten das allen "Knowledge Sourcen" ermöglicht darauf zu schreiben und zu lesen. Lösungen die während dem Problemlösungsprozess entstehen werden auf das Blackboard gelegt, sie nennt sie "Hypothesis". Eine solche Hypothese hat ein Abstraktionslevel welcher die konzeptionelle Distanz vom Input darstellt. Ein tiefer Abstraktionslevel bedeutet man hat eine Repräsentation die näher beim Input ist, ein hoher dass man näher beim Output ist.
+\paragraph{Knowledge Sources}
+Knowledge Sources sind Subsysteme die spezifische Aspekte des Gesamtproblems lösen. Keine Knowledge Source kann das Gesamtproblem selbst lösen, dies ist nur durch zusammenführen aller Teillösungen möglich. Sie kommunizieren nicht direkt untereinander, sondern schreiben und lesen nur auf dem Blackboard. Jede Knowledge Source muss die Bedingungen kennen unter welchen sie zur Lösung beitragen kann, deshalb werden sie unterteilt in einen Condition und einen Action Teil. Der Condition Teil evaluiert anhand dem das auf dem Blackboard steht, ob zur Lösung beigetragen werden kann. Der Action Teil produziert dann eine neue Teillösung.
+\paragraph{Control}
+Die Control Komponente läuft in einer Schlaufe die den Inhalt des Blackboards überwacht und entscheidet was als nächstes ausgeführt werden soll. Die Entscheidungen basieren eventuell auf Berechnungen die von speziellen Knowledge Sources ausgeführt werden.
+
+Die folgende Grafik zeigt das Zusammenspiel der einzelnen Komponenten.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{figures/02-blackboard-1}
+	\caption{Zusammenspiel der Blackboard Komponenten}
+\end{figure}
 
 \section{Consequences}
 \begin{itemize}
