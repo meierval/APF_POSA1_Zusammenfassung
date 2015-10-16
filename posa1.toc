@@ -36,3 +36,25 @@
 \contentsline {section}{\numberline {3.6}Known Uses}{12}{section.3.6}
 \contentsline {section}{\numberline {3.7}Relationships}{12}{section.3.7}
 \contentsline {section}{\numberline {3.8}Exam Questions}{12}{section.3.8}
+\contentsline {chapter}{\numberline {4}Model-View-Controller}{13}{chapter.4}
+\contentsline {section}{\numberline {4.1}Summary}{13}{section.4.1}
+\contentsline {section}{\numberline {4.2}Context}{13}{section.4.2}
+\contentsline {section}{\numberline {4.3}Problem}{13}{section.4.3}
+\contentsline {section}{\numberline {4.4}Solution}{13}{section.4.4}
+\contentsline {section}{\numberline {4.5}Consequences}{14}{section.4.5}
+\contentsline {section}{\numberline {4.6}Known Uses}{15}{section.4.6}
+\contentsline {section}{\numberline {4.7}Relationships}{15}{section.4.7}
+\contentsline {section}{\numberline {4.8}Exam Questions}{15}{section.4.8}
+\contentsline {chapter}{\numberline {5}Presentation-Abstraction-Control}{16}{chapter.5}
+\contentsline {section}{\numberline {5.1}Summary}{16}{section.5.1}
+\contentsline {section}{\numberline {5.2}Context}{16}{section.5.2}
+\contentsline {section}{\numberline {5.3}Problem}{16}{section.5.3}
+\contentsline {section}{\numberline {5.4}Solution}{16}{section.5.4}
+\contentsline {paragraph}{Top-Level Agent}{16}{paragraph*.14}
+\contentsline {paragraph}{Bottom-Level Agents}{16}{paragraph*.15}
+\contentsline {paragraph}{Intermediate-Level Agents}{17}{paragraph*.16}
+\contentsline {subsection}{\numberline {5.4.1}Structure}{17}{subsection.5.4.1}
+\contentsline {section}{\numberline {5.5}Consequences}{17}{section.5.5}
+\contentsline {section}{\numberline {5.6}Known Uses}{18}{section.5.6}
+\contentsline {section}{\numberline {5.7}Relationships}{18}{section.5.7}
+\contentsline {section}{\numberline {5.8}Exam Questions}{18}{section.5.8}

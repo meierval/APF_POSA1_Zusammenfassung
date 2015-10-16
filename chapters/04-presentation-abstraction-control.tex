@@ -17,9 +17,18 @@ Strukturierung der interaktiven Applikation als eine baumartige Hirarchie von PA
 \paragraph{Bottom-Level Agents} Repräsentieren in sich geschlossene semantische Konzepte auf denen User des Systems arbeiten können. 
 \paragraph{Intermediate-Level Agents} Repräsentieren entweder Kombinationen oder Beziehungen zwischen Low-Level Agents. 
 Ein Agent ist in die Komponenten Presentation, Abstraction und Control unterteilt. Die Presentation Komponente bietet das sichtbare Verhalten des PAC Agent. Von der Abstraction Komponente wird das Datenmodell verwaltet, sie bietet Funktionalität welche auf diesen Daten operiert. Die Control Komponente verbindet Presentation und Abstraction, und bietet zusätzlich Funktionalität die dem Agent ermöglicht mit anderen Agents zu kommunizieren.
-
-
 \subsection{Structure}
+Folgende Grafik zeigt die oben erwähnten drei Levels für eine Beispiel Applikation die als Informationssystem für Politische Wahlen dient. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{figures/04-pac-1}
+	\caption{PAC Level in einer Beispiel Applikation}
+\end{figure}
+Wie man sieht gibt es einen Top-Level PAC Agent. Dieser ist wie jeder Agent in die drei Komponenten unterteilt. Die Presentation Komponente hat auf diesem Level kaum Verantwortlichkeiten. Sie hat vieleicht UI Komponenten die von der gesamten Applikation verwendet werden, oder sie fällt ganz weg. 
+Die Control Komponente auf diesem Level ermöglicht Lower-Level Agents auf die Services dieses Layers zuzugreifen, ausserdem koordiniert sie die Hierarchie der Agents und hält Informationen über die Interaktion des Users mit dem System.
+Die Abstraction Komponente bietet in der Beispiel Applikation eine Schnittstelle zum darunter liegenden Daten Repository, es werden ausserdem Algorithmen zur Berechnung von Vorhersagen etc. hier implementiert. \\
+Bottom-Level PAC Agents präsentieren auf der Presentation Komponente eine spezifische View der Daten, und bieten Zugriff auf alle Funktionen die ein User auf diesen tätigen kann. Die Abstraction Komponente ist ebenfalls für die Datenhaltung zuständig, allerdings sind hier keine anderen Agents davon abhängig. Die Control Komponente dient als Adapter zwischen Presentation und Abstraction, ausserdem kommuniziert Sie mit den höher gelegenen Agents. \\
+Intermediate-Level PAC Agents können zwei verschiedene Rollen haben, composition oder coordination. In der composition Role führen sie die Bottom-Level Agents zu einer Abstraktion zusammen. In der coordination Role sind sie für die Konsistenz zwischen den Lower-Level Agents zuständig. 
 
 \section{Consequences}
 \begin{itemize}
