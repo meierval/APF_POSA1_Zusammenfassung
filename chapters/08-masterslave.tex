@@ -1,0 +1,57 @@
+\chapter{Master-Slave}
+
+\section{Summary}
+Beim Master-Slave Pattern gibt es eine Master Komponente die Arbeit an mehrere identische Slave Komponenten verteilt. Von den Resultaten der Slaves berechnet der Master ein Endresultat. Das Pattern unterstützt Fehlertoleranz, Parallelverarbeitung und Rechengenauigkeit.
+\section{Context}
+Unterteilung von Aufträgen in semantisch identische Teilaufträge.
+\section{Problem}
+Zur Lösung von vielen Problemen wird das Problem in Teilprobleme aufgeteilt, und die Lösung dann aus den Lösungen der Teilprobleme berechnet. Bei diesem sogenannten "Devide and Conquer" treten folgende Forces auf:
+\begin{itemize}
+	\item Clients soll nicht bewusst sein, dass die Berechnung auf dem "Devide and Conquer" Prinzip bassiert.
+	\item Weder Clients noch die Berechnung von Teilproblemen soll von den Partitionierungsalgorithmen abhängig sein.
+	\item Es kann hilfreich sein, verschiedene semantisch gleiche Implementationen für die Bearbeitung von Teilproblemen zu haben, unter anderem um die Rechengenauigkeit zu verbessern.
+	\item Das berechnen von Teilproblemen benötigt manchmal Koordination.
+\end{itemize}
+\section{Solution}
+Mittels des Master-Slave Pattern wird eine Koordinationsinstanz, der Master, zwischen dem Client und den Slaves eingeführt. Die Master Komponente unterteilt die Arbeit in gleich grosse Subtasks und verteilt diese an die Salves. zum Schluss berechnet er das Resultat aus den Teilresultaten. Dieses generelle Prinzip findet man in drei Anwendungsgebieten:
+\begin{itemize}
+	\item \textbf{Fault Tolerance:} Die Ausführung wird an mehrere gleiche Implementationen gegeben. Schlägt eine Fehl hat man immer noch die anderen.
+	\item \textbf{Parallel Computing:} Eine Komplexe Aufgabe wird in Teilaufgaben unterteilt die parallel ausgeführt werden.
+	\item \textbf{Computational Accuracy:} Die Ausführung wird an mehrere verschiedene Implementationen verteilt. Inkorrekte Resultate können erkannt und behandelt werden.
+\end{itemize}
+Alle Slaves sollten ein gemeinsames Interface verwenden, und Clients nur mit dem Master kommunizieren.
+\subsection{Structure}
+Das Pattern kennt wie bereits erklärt zwei verschiedene Komponenten:
+\paragraph{Master} 
+\begin{itemize}
+	\item Partitionierung der Arbeit
+	\item Instanziert Slaves
+	\item Berechnet Endresultat aus Teilresultaten
+\end{itemize}
+\paragraph{Slave}
+\begin{itemize}
+	\item Implementieren die Teilaufgaben die vom Master verwendet werden
+	\item Mindestens zwei Instanzen
+\end{itemize}
+Die Teilaufgaben können den Slaves als Parameter übergeben werden, oder in einem globalen Repository vom Master zur Verfügung gestellt werden. Das selbe gilt für die Resultate. Sie können entweder als Rückgabewert dem Master übermittelt werden, oder in ein weiteres Repository abgelegt werden, wo sie der Master abholt.
+\section{Consequences}
+\begin{itemize}
+    \pro{\textbf{bla} bla}
+\end{itemize}
+
+\section{Known Uses}
+\begin{itemize}
+	\item bla. 
+\end{itemize}
+
+\section{Relationships}
+\begin{itemize}
+	\item \textit{Blabla:} Blabla
+
+\end{itemize}
+
+\section{Exam Questions}
+\begin{itemize}
+  	\item Behauptung: dies ist eine Behauptung? (Lösung)
+    \item Frage: Dies ist eine Frage? (Lösung)
+\end{itemize}
