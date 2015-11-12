@@ -5,9 +5,9 @@ Beim Master-Slave Pattern gibt es eine Master Komponente die Arbeit an mehrere i
 \section{Context}
 Unterteilung von Aufträgen in semantisch identische Teilaufträge.
 \section{Problem}
-Zur Lösung von vielen Problemen wird das Problem in Teilprobleme aufgeteilt, und die Lösung dann aus den Lösungen der Teilprobleme berechnet. Bei diesem sogenannten "Devide and Conquer" treten folgende Forces auf:
+Zur Lösung von vielen Problemen wird das Problem in Teilprobleme aufgeteilt, und die Lösung dann aus den Lösungen der Teilprobleme berechnet. Bei diesem sogenannten \glqq Divide and Conquer\grqq{} treten folgende Forces auf:
 \begin{itemize}
-	\item Clients soll nicht bewusst sein, dass die Berechnung auf dem "Devide and Conquer" Prinzip bassiert.
+	\item Clients soll nicht bewusst sein, dass die Berechnung auf dem \glqq Divide and Conquer\grqq{} Prinzip bassiert.
 	\item Weder Clients noch die Berechnung von Teilproblemen soll von den Partitionierungsalgorithmen abhängig sein.
 	\item Es kann hilfreich sein, verschiedene semantisch gleiche Implementationen für die Bearbeitung von Teilproblemen zu haben, unter anderem um die Rechengenauigkeit zu verbessern.
 	\item Das berechnen von Teilproblemen benötigt manchmal Koordination.
@@ -34,20 +34,30 @@ Das Pattern kennt wie bereits erklärt zwei verschiedene Komponenten:
 	\item Mindestens zwei Instanzen
 \end{itemize}
 Die Teilaufgaben können den Slaves als Parameter übergeben werden, oder in einem globalen Repository vom Master zur Verfügung gestellt werden. Das selbe gilt für die Resultate. Sie können entweder als Rückgabewert dem Master übermittelt werden, oder in ein weiteres Repository abgelegt werden, wo sie der Master abholt.
-\section{Consequences}
+
+\section{Variants}
 \begin{itemize}
-    \pro{\textbf{bla} bla}
+	\item \textit{Master-Slave for fault tolerance:} Der Master verteilt die gleiche Aufgabe an eine fixe Anzahl von Slaves welche dieselbe Implementation haben. Sobald der erste Slave fertig ist, kann das Resultat an den Client zurückgeschickt werden. Diese Variante ist insofern fehlertolerant, dass immer ein Resultat berechnet werden kann, solange nicht alle Slaves ausfallen. Der Master ist eine kritische Komponente weil er nur einmal vorkommt und somit nicht ausfallen darf.
+	
+	\item \textit{Master-Slave for parallel computation:} Dies ist die am meisten benutzte Variante des Patterns. Der Master teilt die Aufgabe in identische Subtasks auf, welche parallel von den Slaves ausgeführt werden. Wenn alle Tasks durchgelaufen sind, wird das finale Resultat vom Master zusammengefügt.
+	
+	\item \textit{Master-Slave for computational accuracy:} In dieser Variante wird die gleiche Aufgabe an mindestens drei Slaves mit unterschiedlicher Implementation delegiert. 
+	Sobald alle Tasks ageschlossen sind vergleicht der Master die Resultate.
 \end{itemize}
 
-\section{Known Uses}
+\section{Consequences}
 \begin{itemize}
-	\item bla. 
+    \pro{\textbf{Exchangeability and extensibility} Mit einer abstrakten Basisklasse für Slaves ist es möglich neue Implementation hinzuzufügen oder alte auszutauschen ohne grosse Änderungen am Master.}
+    \pro{\textbf{Separation  of  concerns} Verschiedene Aufgaben werden getrennt behandelt. Der Code welcher die Arbeit in Subtasks aufteilt, sowie der Code welcher die Tasks ausführt sind separiert.}
+    \pro{\textbf{Efficiency} Bessere Performance durch Parallelisierung.}
+    \con{\textbf{Feasibility} Um das Pattern einzusetzen muss Aufwand betrieben werden: Die Aufgabe muss aufgeteilt, Daten kopiert, Slaves gestartet und das Resultat zusammengefügt werden. Diese Aktivitäten verbrauchen Ressourcen.}
+    \con{\textbf{Machine  dependency} Das Master-Slave Pattern for parallel computation ist von der Architektur des Systems auf dem läuft abhängig. Dies kann Changeability und Portability einschränken.}
+    \con{\textbf{Hard to implement} Gewisse Aspekte sind nicht einfach zu implementieren. Z.B. wie die Aufgabe aufgeteilt wird, wie Master und Slave kollaborieren, wie das Endresultat berechnet wird, wie Fehler behandelt werden, etc.} 
 \end{itemize}
 
 \section{Relationships}
 \begin{itemize}
-	\item \textit{Blabla:} Blabla
-
+	\item \textit{Object Group:} Pattern für Gruppen-Kommunikation Fehlertoleranz verteilten Applikationen
 \end{itemize}
 
 \section{Exam Questions}
