@@ -1,17 +1,38 @@
 \chapter{Forwarder Receiver}
 \section{Summary}
-
+Das Forwarder-Receiver Pattern ermöglicht transparente Interprozesskommunikation für Peer-to-Peer-Systeme. Forwarder und Receiver Komponenten entkoppeln die Peers von den unterliegenden Kommunikationsmechanismen.
 
 \section{Context}
-
+Peer-to-Peer Kommunikation.
 
 \section{Problem}
+Ein gängiger Weg um verteilte Applikationen zu erstellen, ist die Verwendung von low-level Mechanismen für die Interprozesskommunikation wie bspw. TCP/IP, Sockets oder Message Queues. Diese sind effizienter als high-level Mechanismen wie z.B. Remote Procedure Calls. Allerdings führen die low-level Mechanismen oft zu Abhängigkeiten auf das Betriebssystem und die verwendeten Netzwerkprotokolle.
 
+Das Forwarder-Receiver Pattern um ist nützlich um folgende Forces auszubalancieren:
+\begin{itemize}
+	\item Das System soll die Austauschbarkeit der Kommunikationsmechanismen ermöglichen.
+	\item Die Kooperation der Komponenten folgt einem Peer-to-Peer Modell, in welchem der Sender lediglich den Namen des Empfängers kennen muss.
+	\item Die Kommunikation zwischen den Peers soll keinen grossen Einfluss auf die Performance haben.
+\end{itemize}
 
 \section{Solution}
-
+Verteilte Peers arbeiten zusammen an der Lösung eines bestimmten Problems. Ein Peer kann einerseits ein Client sein und Services anfordern oder ein Server sein und Services anbieten oder beides. Die Details der unterliegenden Kommunikationsmechanismen werden dabei vor den Peers versteckt indem sie separate Komponenten gekapselt werden.
 
 \section{Structure}
+Das Forwarder-Receiver Pattern besteht aus folgenden drei Komponenten:
+\paragraph{Peer:} Peer Komponenten führen die eigentliche Aufgabe der Applikation aus. Dazu kommunizieren sie mit anderen Peers. Ein Peer kennt lediglich die Namen der anderen Peers mit denen es kommuniziert. Es verwendet einen Forwarder um Nachrichten zu verschicken und einen Receiver um Nachrichten zu empfangen.
+
+\paragraph{Forwarder:} Die Forwarder Komponente bietet ein generelles Interface welches eine Abstraktion eines bestimmten Interprozesskommunikationsmechanismus ist und ist zuständig für das Umwandeln und Versenden von Nachrichten. Die Komponente verfügt über ein Name-to-Address-Mapping und kann somit den Peers anhand ihres Namens eine physische Adresse zuordnen.
+
+\paragraph{Receiver:} Receiver Komponenten sind zuständig für das Empfangen und Umwandeln von Nachrichten.
+
+\medskip
+Die folgende Grafik zeigt das Zusammenspiel der Komponenten:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figures/11-forwarder-receiver-1.png}
+	\caption{View Handler Komponenten}
+\end{figure}
 
 
 \section{Variants}
