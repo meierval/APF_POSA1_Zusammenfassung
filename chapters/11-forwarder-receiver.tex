@@ -36,16 +36,29 @@ Die folgende Grafik zeigt das Zusammenspiel der Komponenten:
 
 
 \section{Variants}
-
+\begin{itemize}
+	\item \textit{Forwarder-Receiver without name-to-address-mapping:} Wenn Performance wichtiger ist, als sämtliche Aspekte des unterliegenden IPC-Mechanismus zu kapseln, kann es Sinn machen, das Adress-Mapping zu entfernen. Dies kann aber die Einfachheit, den IPC-Mechanismus zu wechseln, massiv mindern.
+\end{itemize}
 
 \section{Known Uses}
-
+\begin{itemize}
+	\item Das Software-Development-Kit \textbf{TASC} unterstützt die Umsetzung des Fowarder-Receiver-Patterns in verteilten Systemen in der Fabrik-Automatisierung.
+	\item Die Materialfluss-Steuerungssoftware, welche als Teil des \textbf{REBOOT}-Projekts entwickelt wurde, arbeitet mit dem Forwarder-Receiver-Pattern
+	\item Die \textbf{ATM-P}-Switching-Systeme verwenden Forwarder-Receiver zwischen statisch verteilten Systemen z.B. zwischen Prozessmanagement und Kommunikations-Agents
+	\item In der verteilten Smalltalk-Umgebung \textbf{BrouHaHa} wird die Inter-Prozess-Kommunikation mit Forwarder-Receiver umgesetzt
+\end{itemize}
 
 \section{Consequences}
-
+\begin{itemize}
+    \pro{\textbf{Effiziente Kommunikation zwischen Prozessen}}
+    \pro{\textbf{Kapselung der IPC-Technologie:} Alle Abhänigkeiten auf konkrete IPC-Technologien sind in den Forwardern und Receivern gekapselt. }
+    \con{\textbf{Keine Unterstützung von flexibler Umkonfiguration der Komponenten}}
+\end{itemize}
 
 \section{Relationships}
-
+\begin{itemize}
+	\item Das \textit{Client-Dispatcher-Server}-Pattern bietet transparente Kommunikation zwischen Prozessen, bei der die Verteilung der Komponenten zur Compile-Zeit noch nicht bekannt sind oder dynamisch zur Laufzeit ändern. 
+\end{itemize}
 
 \section{Exam Questions}
 \begin{itemize}
