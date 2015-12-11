@@ -40,16 +40,35 @@ Die folgende Grafik zeigt das Zusammenspiel der Komponenten:
 \end{figure}
 
 \section{Variants}
-
+\begin{itemize}
+	\item \textit{Distributed Dispatchers}. Anstelle eines zentralen Dispatchers kann ein distributed dispatcher eingeführt werden. Bei einem Request des Clients ruft "sein" Dispatcher den Dispatcher beim Ziel-Node auf. Alternativ könnte der Client direkt den Dispatcher am Ziel-Node aufrufen, dadurch geht aber die Location-Transparency verloren. Dann sollte eher das \textit{Broker-Pattern} eingesetzt werden
+	\item \textit{Client-Dispatcher-Server wobei der Client die Kommunikation verwaltet}. 
+	\item \textit{Client-Dispatcher-Server mit heterogener Kommunikation }. Es ist nicht immer möglich, Clients und Server mit nur einem Kommunikationsmechanismus zu verwenden (z.B. der eine Server nutzt Sockets, der andere Pipes). Dann wird dieses Pattern angewendet.
+	\item \textit{Client-Dispatcher-Service}. In dieser Variante kommuniziert der Client mit Services, nicht mit Servern. Der Dispatcher muss dann zusätzlich wissen, auf welchem Server der gewünschte Service angeboten wird.
+\end{itemize}
 
 \section{Known Uses}
-
+\begin{itemize}
+	\item Die Sun-Implementierung von Remote Procedure Calls
+	\item OMG Corpa nutzt CDS für die Instanzierung des Broker patterns.
+\end{itemize}
 
 \section{Consequences}
+\begin{itemize}
+    \pro{\textit{Austauschbarkeit der Server}. }
+    \pro{\textit{Location- und Migration Transparency.} Clients müssen nicht wissen, wo der Server ist. Dadurch können Server dynamisch migriert werden (solange sie nicht mit einem Client verbunden sind).}
+    \pro{\textit{Umkonfiguration}. Der Entwickler muss sich erst bei Inbetriebnahme entscheiden, welche Netzwerk-Nodes welche Server betreiben. Das CDS-Pattern ermöglicht später auch eine einfache migration in ein verteiltes System.}
+    \pro{\textit{Fault tolerance}. Wenn ein Netzwerk- oder Serverfehler auftritt, können einfach neue Server ins System eingebunden werden, ohne Einfluss auf die Clients.}
+    \con{\textit{Geringere Effizienz durch Indirektion und expliziten Verbindungsaufbau}.}
+    \con{\textit{Grosse Auswirkungen von Änderungen am Dispatcher}. }
+\end{itemize}
 
 
 \section{Relationships}
-
+\begin{itemize}
+	\item \textit{Forwarder-Reciever}.
+	\item \textit{Acceptor and Connector}.
+\end{itemize}
 
 \section{Exam Questions}
 \begin{itemize}
